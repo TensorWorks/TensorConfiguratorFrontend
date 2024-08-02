@@ -33,7 +33,7 @@ document.body.onload = function () {
 	let webRtcTcpRelayIndicator = new WebRtcTcpRelayDetectIndicator();
 
 	// Create a config object. We default to sending the WebRTC offer from the browser as true, TimeoutIfIdle to true, AutoConnect to false and MaxReconnectAttempts to 0
-	const config = new Config({ useUrlParams: true, initialSettings: { OfferToReceive: true, TimeoutIfIdle: true, AutoConnect: false, MaxReconnectAttempts: 0, MatchViewportRes: true, MinQP: 20 } });
+	const config = new Config({ useUrlParams: true, initialSettings: { OfferToReceive: false, TimeoutIfIdle: true, AutoConnect: false, MaxReconnectAttempts: 0, MatchViewportRes: true, MinQP: 20 } });
 
 	// Create stream and spsApplication instances that implement the Epic Games Pixel Streaming Frontend PixelStreaming and Application types
 	const stream = new ScalablePixelStreaming(config);
