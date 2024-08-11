@@ -1,5 +1,5 @@
 import { CarConfigurator, SettingUIFlag, UIOptions } from 'carconfigurator-ui';
-import { AggregatedStats, SettingFlag, TextParameters } from '@epicgames-ps/lib-pixelstreamingfrontend-ue5.4';
+import { AggregatedStats, SettingFlag, TextParameters, PixelStreaming } from '@epicgames-ps/lib-pixelstreamingfrontend-ue5.4';
 import { LoadingOverlay } from './LoadingOverlay';
 import { SPSSignalling } from './SignallingExtension';
 import { MessageStats } from './Messages';
@@ -7,6 +7,10 @@ import { MessageStats } from './Messages';
 // For local testing. Declare a websocket URL that can be imported via a .env file that will override 
 // the signalling server URL builder.
 declare var WEBSOCKET_URL: string;
+
+declare global {
+    interface Window { pixelstreaming: PixelStreaming; }
+}
 
 export class SPSApplication extends CarConfigurator {
 	private loadingOverlay: LoadingOverlay;
@@ -45,6 +49,9 @@ export class SPSApplication extends CarConfigurator {
 				}
 			}
 		);
+
+		// Add stream object to window so we can interact with the interface from browser automation scripts
+		window.pixelstreaming = this.stream;
 	}
 
 	handleSignallingResponse(signallingResp: string, isError: boolean) {
